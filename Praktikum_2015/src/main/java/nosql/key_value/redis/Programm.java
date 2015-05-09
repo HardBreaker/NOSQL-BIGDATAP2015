@@ -3,6 +3,12 @@ package nosql.key_value.redis;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * program logic and minimal console GUI
+ * 
+ * @author SG
+ *
+ */
 public class Programm {
 
 	Scanner scanner = new Scanner(System.in);
@@ -12,10 +18,11 @@ public class Programm {
 	public static final String EINGABE_FEHLER = "Sie haben eine invalide Eingabe gemacht. Bitte versuchen Sie es noch einmal!";
 	public static final String CITYNAME_FEHLER = "Sie haben eine invalide Stadts Name eingegeben. Bitte versuchen Sie es noch einmal!";
 	public static final String PLZ_NICHT_GEFUNDEN_FEHLER = "Die Stadt mit dieser PLZ existiert nicht in der Datenbank. Bitte versuchen Sie es noch einmal!";
-  
+
 	public Programm() {
-//		jedisClient.fillDatabase();
-		
+		// uncomment the line below , to fill database
+		// jedisClient.fillDatabase();
+
 	}
 
 	public String textEingeben(String aufforderung) {
@@ -23,7 +30,6 @@ public class Programm {
 		System.out.print(aufforderung + "> ");
 		String eingabe = scanner.nextLine();
 
-		System.out.println("Ausgabe: " + eingabe);
 		return eingabe;
 	}
 
@@ -50,7 +56,7 @@ public class Programm {
 			break;
 		default:
 			System.out.println(EINGABE_FEHLER);
-			
+
 			break;
 		}
 
@@ -60,13 +66,13 @@ public class Programm {
 		try {
 			int plznb = Integer.valueOf(plz);
 			City city = jedisClient.getCityByPLZ(plznb);
-			System.out.println(city==null);
-			if(city==null) {
+			if (city == null) {
 				System.out.println(PLZ_NICHT_GEFUNDEN_FEHLER);
-			}else {
-				System.out.println("Eine Stadt wurde gefunden: "+ city.getCity()+ " in " + city.getState());
+			} else {
+				System.out.println("Eine Stadt wurde gefunden: "
+						+ city.getCity() + " in " + city.getState());
 			}
-		}  catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println(PLZ_FEHLER);
 
 		}
@@ -75,15 +81,16 @@ public class Programm {
 
 	private int gibPLZZuCity(String cityName) {
 		String upperCaseCityName = cityName.toUpperCase();
-		System.out.println("Gesucht wird nach: '" + upperCaseCityName+"'");
-		List<String> list= jedisClient.getListFromCityname(upperCaseCityName);
-		System.out.println("Gefunden PLZ für " + cityName + ": " +list.toString());
+		List<String> list = jedisClient.getListFromCityname(upperCaseCityName);
+		System.out.println("Gefunden PLZ für " + cityName + ": "
+				+ list.toString());
 		return 0;
 	}
 
 	public void start() {
 		while (true) {
-			String eingabe = textEingeben("Bitte geben Sie p und gewünsche Postleitzahl ein. Beipiel: 'p 12345' \n"
+			String eingabe = textEingeben(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"
+					+ "Bitte geben Sie p und gewünsche Postleitzahl ein. Beipiel: 'p 12345' \n"
 					+ "Bitte geben Sie c und Name der gesuchten Stadt ein. Beipiel: 'c hamburg'  \n"
 					+ "Geben Sie 'q' ein, um das Programm zu beenden \n");
 			String modus = eingabe.substring(0, 1);

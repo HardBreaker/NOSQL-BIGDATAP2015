@@ -44,11 +44,7 @@ public class JedisDB {
 		return getCityFromMap(city);
 	}
 
-	public City getCityByName(String cityName) {
-		Map<String, String> city = dbConnector.hgetAll("name:" + cityName);
-		System.err.println("ljdkkjd " + city.size());
-		return getCityFromMap(city);
-	}
+	
 
 	public void fillDatabase() {
 		Gson gson = new Gson();
@@ -58,7 +54,6 @@ public class JedisDB {
 			while (sc.hasNextLine()) {
 
 				String jsonObj = (String) sc.nextLine();
-
 				System.out.println(jsonObj);
 				City city = gson.fromJson(jsonObj, City.class);
 				cities.add(city);
