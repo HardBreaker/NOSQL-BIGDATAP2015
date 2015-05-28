@@ -26,6 +26,9 @@ public class Programm {
 //		hbaseClient.fillDatabase();
 
 	}
+	 public void setDatabase(String database) {
+		 hbaseClient.setDatabase(database);
+	 }
 
 	public String textEingeben(String aufforderung) {
 

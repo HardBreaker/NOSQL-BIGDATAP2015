@@ -9,7 +9,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		Programm p = new Programm();
+		p.setDatabase(DATABASENAME);
 		p.start();
+		
 //		MongoDB dbClient = new MongoDB ("141.22.29.87", 27017);
 //		dbClient.setDatabase(DATABASENAME);
 //	//	dbClient.fillDatabase(COLLECTIONNAME); //nur einmal
